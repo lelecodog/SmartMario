@@ -1,6 +1,6 @@
 import pygame as pg
 
-from code.Const import COLOR_WHITE, COLOR_BLACK
+from code.Const import COLOR_WHITE, COLOR_BLACK, COLOR_YELLOW
 
 
 class Menu:
@@ -16,14 +16,11 @@ class Menu:
         self.overlay.fill(COLOR_BLACK)
 
         # Text font
-        self.title_font = pg.font.SysFont("Arial", 75)
-        self.menu_font = pg.font.SysFont("Arial", 50)
+        self.title_font = pg.font.SysFont("Arial", 80)
+        self.menu_font = pg.font.SysFont("Arial", 40)
 
-        # Text rendering
-        self.title_text = self.title_font.render("SMART  MARIO", True, COLOR_WHITE)
-        self.new_text = self.menu_font.render("NEW GAME", True, COLOR_WHITE)
-        self.score_text = self.menu_font.render("SCORE", True, COLOR_WHITE)
-        self.exit_text = self.menu_font.render("EXIT", True, COLOR_WHITE)
+        self.selected_option = 0
+        self.options = ["NEW GAME", "SCORE", "EXIT"]
 
     def run(self):
         pg.mixer_music.load('./asset/menu.mp3')
@@ -35,17 +32,24 @@ class Menu:
             # Apply dark overlay
             self.window.blit(self.overlay, self.rect)
 
-            # Text positioning
-            title_rect = self.title_text.get_rect(center=(self.window.get_rect().centerx, 100))
-            new_rect = self.new_text.get_rect(center=(self.window.get_rect().centerx, 500))
-            score_rect = self.score_text.get_rect(center=(self.window.get_rect().centerx, 600))
-            exit_rect = self.exit_text.get_rect(center=(self.window.get_rect().centerx, 700))
+            # Render title
+            title_text = self.title_font.render("SMART  MARIO", True, COLOR_WHITE)
+            title_rect = title_text.get_rect(center=(self.window.get_rect().centerx, 100))
+            self.window.blit(title_text, title_rect)
 
-            # Draw on screen
-            self.window.blit(self.title_text, title_rect)
-            self.window.blit(self.new_text, new_rect)
-            self.window.blit(self.score_text, score_rect)
-            self.window.blit(self.exit_text, exit_rect)
+            # Render menu options with dynamic color
+            for i, option in enumerate(self.options):
+                color = COLOR_YELLOW if i == self.selected_option else COLOR_WHITE
+                text = self.menu_font.render(option, True, color)
+                text_rect = text.get_rect(center=(self.window.get_width() // 2, 400 + i * 100))
+                self.window.blit(text, text_rect)
+
+                # Detect if mouse is hovering over the text
+                if text_rect.collidepoint(pg.mouse.get_pos()):
+                    color = COLOR_YELLOW
+                    self.selected_option = i  # Actualize option with mouse
+                else:
+                    color = COLOR_WHITE
 
             pg.display.flip()
 
@@ -55,4 +59,11 @@ class Menu:
                     pg.quit()  # Close Window
                     quit()  # End Pygame
 
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_DOWN:
+                        self.selected_option = (self.selected_option + 1) % 3
+                        pg.mixer.Sound('./asset/select-option.mp3').play()
+                    elif event.key == pg.K_UP:
+                        self.selected_option = (self.selected_option - 1) % 3
+                        pg.mixer.Sound('./asset/select-option.mp3').play()
 
