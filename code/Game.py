@@ -1,7 +1,19 @@
 import pygame as pg
 
 from code.Const import WIN_WIDTH, WIN_HEIGHT
+from code.Level import Level
 from code.Menu import Menu
+from code.Player import Player
+from code.PlayerSelector import PlayerSelector
+
+
+def select_player():
+    name = input("Digite o nome do jogador: ")
+    player = Player.load(name)
+    if not player:
+        player = Player(name)
+        print("Novo jogador criado!")
+    return player
 
 
 class Game:
@@ -9,10 +21,24 @@ class Game:
         # setup
         pg.init()
         self.window = pg.display.set_mode(size=(WIN_WIDTH, WIN_HEIGHT))
+        self.options = ["NEW GAME", "SCORE", "EXIT"]
 
     def run(self, ):
-
         while True:
             menu = Menu(self.window)
-            menu.run()
+            menu_return = menu.run()
+
+            if menu_return == self.options[0]:  # "NEW GAME"
+                selector = PlayerSelector(self.window)
+                player = selector.run()
+                level = Level(self.window, 'level1', player)
+                level.run()
+
+            elif menu_return == self.options[2]:
+                pg.quit()  # Close Window
+                quit()  # End Pygame
+            else:
+                pass
+
+
 

@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc523798-06c8-4f7d-b6ac-78050be61917" name="Changes" comment="Creating asset folder&#10;Creating Menu&#10;Creating the Const file">
-      <change afterPath="$PROJECT_DIR$/asset/select-option.mp3" afterDir="false" />
+    <list default="true" id="bc523798-06c8-4f7d-b6ac-78050be61917" name="Changes" comment="Creating Menu color options">
+      <change afterPath="$PROJECT_DIR$/code/Entity.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/Level.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/Player.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/PlayerSelector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Const.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Const.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/Menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +109,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755628547276</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Creating Menu color options">
+      <option name="closed" value="true" />
+      <created>1755640037977</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1755640037977</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -123,6 +135,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Creating main loop and classes Game, Menu" />
     <MESSAGE value="Creating asset folder&#10;Creating Menu&#10;Creating the Const file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating asset folder&#10;Creating Menu&#10;Creating the Const file" />
+    <MESSAGE value="Creating Menu color options" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating Menu color options" />
   </component>
 </project>

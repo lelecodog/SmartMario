@@ -33,7 +33,7 @@ class Menu:
             self.window.blit(self.overlay, self.rect)
 
             # Render title
-            title_text = self.title_font.render("SMART  MARIO", True, COLOR_WHITE)
+            title_text = self.title_font.render("SMART  MARIO", True, COLOR_YELLOW)
             title_rect = title_text.get_rect(center=(self.window.get_rect().centerx, 100))
             self.window.blit(title_text, title_rect)
 
@@ -66,4 +66,5 @@ class Menu:
                     elif event.key == pg.K_UP:
                         self.selected_option = (self.selected_option - 1) % 3
                         pg.mixer.Sound('./asset/select-option.mp3').play()
-
+                    elif event.key == pg.K_RETURN:  # Enter
+                        return self.options[self.selected_option]
