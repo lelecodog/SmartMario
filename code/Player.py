@@ -5,23 +5,23 @@ class Player:
     def __init__(self, name):
         self.name = name
         self.score = 0
-        self.unlocked_levels = ['level1']  # Start with first level unlocked
+        self.unlocked_worlds = ['world1']  # Start with first world unlocked
 
     def add_score(self, points):
         self.score += points
 
-    def unlock_level(self, level_name):
-        if level_name not in self.unlocked_levels:
-            self.unlocked_levels.append(level_name)
+    def unlock_world(self, level_name):
+        if level_name not in self.unlocked_worlds:
+            self.unlocked_worlds.append(level_name)
 
     def __str__(self):
-        return f"Jogador: {self.name} | Score: {self.score} | Níveis desbloqueados: {self.unlocked_levels}"
+        return f"Jogador: {self.name} | Score: {self.score} | Níveis desbloqueados: {self.unlocked_worlds}"
 
     def save(self):
         data = {
             'name': self.name,
             'score': self.score,
-            'unlocked_levels': self.unlocked_levels
+            'unlocked_worlds': self.unlocked_worlds
         }
         with open(f'{self.name}.json', 'w') as f:
             json.dump(data, f)
@@ -33,7 +33,7 @@ class Player:
                 data = json.load(f)
                 player = Player(data['name'])
                 player.score = data['score']
-                player.unlocked_levels = data['unlocked_levels']
+                player.unlocked_worlds = data['unlocked_worlds']
                 return player
         except FileNotFoundError:
             return None

@@ -1,7 +1,7 @@
 import pygame as pg
 
 from code.Const import WIN_WIDTH, WIN_HEIGHT
-from code.Level import Level
+from code.World import World
 from code.Menu import Menu
 from code.Player import Player
 from code.PlayerSelector import PlayerSelector
@@ -31,8 +31,8 @@ class Game:
             if menu_return == self.options[0]:  # "NEW GAME"
                 selector = PlayerSelector(self.window)
                 player = selector.run()
-                level = Level(self.window, 'level1', player)
-                level.run()
+                world = World(self.window, 'world1', player)
+                world.run()
 
             elif menu_return == self.options[2]:
                 pg.quit()  # Close Window

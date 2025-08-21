@@ -4,15 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc523798-06c8-4f7d-b6ac-78050be61917" name="Changes" comment="Creating Menu color options">
-      <change afterPath="$PROJECT_DIR$/code/Entity.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/code/Level.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/code/Player.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/code/PlayerSelector.py" afterDir="false" />
+    <list default="true" id="bc523798-06c8-4f7d-b6ac-78050be61917" name="Changes" comment="Creating class PlayerSelector.py, Player.py and start class Level.py">
+      <change afterPath="$PROJECT_DIR$/asset/world1_bg01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asset/world1_bg02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/Background.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/EntityFactory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Const.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Const.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Entity.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Level.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/World.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/PlayerSelector.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/PlayerSelector.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +120,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755640037977</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Creating class PlayerSelector.py, Player.py and start class Level.py">
+      <option name="closed" value="true" />
+      <created>1755719468373</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1755719468373</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,6 +147,7 @@
     <MESSAGE value="Creating main loop and classes Game, Menu" />
     <MESSAGE value="Creating asset folder&#10;Creating Menu&#10;Creating the Const file" />
     <MESSAGE value="Creating Menu color options" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating Menu color options" />
+    <MESSAGE value="Creating class PlayerSelector.py, Player.py and start class Level.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating class PlayerSelector.py, Player.py and start class Level.py" />
   </component>
 </project>

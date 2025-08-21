@@ -2,7 +2,7 @@ import pygame as pg
 import os
 import json
 from code.Const import COLOR_WHITE, COLOR_BLACK, COLOR_YELLOW
-from code.Level import Level
+from code.World import World
 from code.Player import Player
 
 
