@@ -7,7 +7,7 @@ class Menu:
 
     def __init__(self, window):
         self.window = window
-        self.surf = pg.image.load('./asset/menu.jpg')
+        self.surf = pg.image.load('./asset/menu.jpg').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)
 
         # create dark overlay

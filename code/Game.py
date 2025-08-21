@@ -31,6 +31,7 @@ class Game:
             if menu_return == self.options[0]:  # "NEW GAME"
                 selector = PlayerSelector(self.window)
                 player = selector.run()
+                pg.mixer_music.stop()
                 world = World(self.window, 'world1', player)
                 world.run()
 
