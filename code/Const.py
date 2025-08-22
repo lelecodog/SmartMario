@@ -6,7 +6,11 @@ COLOR_YELLOW = (255, 255, 0)
 # E
 ENTITY_SPEED = {
     'world1_bg01': 0,
-    'world1_bg02': 1
+    'world1_bg02': 1,
+    'world1_bg03': 2,
+    'world1_bg04': 2,
+    'Player': 3,
+
 }
 
 # W

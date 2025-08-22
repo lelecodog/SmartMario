@@ -18,6 +18,7 @@ class World:
         self.player = player
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity('world1_bg'))
+        self.entity_list.append(EntityFactory.get_entity('Player'))
         self.timeout = 20000  # seconds
 
     def run(self):
@@ -31,7 +32,11 @@ class World:
 
             for ent in self.entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)
-                ent.move()
+                # Se a entidade for o jogador, chama update()
+                if hasattr(ent, "update"):
+                    ent.update()
+                else:
+                    ent.move()
 
             for event in pg.event.get():
                 if event.type == pg.QUIT:

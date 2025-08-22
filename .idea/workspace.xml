@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc523798-06c8-4f7d-b6ac-78050be61917" name="Changes" comment="Creating class Background, EntityFactory&#10;&#10;Change level to World">
-      <change afterPath="$PROJECT_DIR$/asset/world1.mp3" afterDir="false" />
+    <list default="true" id="bc523798-06c8-4f7d-b6ac-78050be61917" name="Changes" comment="Creating method to print in class World">
+      <change afterPath="$PROJECT_DIR$/asset/Player.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asset/world1_bg03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/PlayerEntity.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/asset/world1_bg01.png" beforeDir="false" afterPath="$PROJECT_DIR$/asset/world1_bg01.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/asset/world1_bg02.png" beforeDir="false" afterPath="$PROJECT_DIR$/asset/world1_bg02.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Entity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Const.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Const.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/EntityFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/EntityFactory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/World.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/World.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,15 +38,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.Game.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Menu.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.Game.executor": "Run",
+    "Python.Menu.executor": "Run",
+    "Python.World.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\ProjetosPython\SmartMario\asset" />
@@ -133,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755802436490</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Creating method to print in class World">
+      <option name="closed" value="true" />
+      <created>1755813178509</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1755813178509</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,6 +163,7 @@
     <MESSAGE value="Creating Menu color options" />
     <MESSAGE value="Creating class PlayerSelector.py, Player.py and start class Level.py" />
     <MESSAGE value="Creating class Background, EntityFactory&#10;&#10;Change level to World" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating class Background, EntityFactory&#10;&#10;Change level to World" />
+    <MESSAGE value="Creating method to print in class World" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating method to print in class World" />
   </component>
 </project>
