@@ -9,7 +9,8 @@ ENTITY_SPEED = {
     'world1_bg02': 1,
     'world1_bg03': 2,
     'world1_bg04': 2,
-    'Player': 3,
+    'player': 4,
+    'coin': 5
 
 }
 

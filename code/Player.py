@@ -1,4 +1,8 @@
-import json
+import json, os
+
+
+def player_list():
+    return [f[:-5] for f in os.listdir() if f.endswith('.json')]
 
 
 class Player:

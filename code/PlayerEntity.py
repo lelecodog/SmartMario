@@ -6,6 +6,13 @@ from code.Const import ENTITY_SPEED, WIN_HEIGHT
 from code.Entity import Entity
 
 
+def die():
+    # Aqui você pode definir o que acontece quando o jogador morre
+    print("Game Over")
+    pg.quit()
+    sys.exit()
+
+
 class PlayerEntity(Entity):
 
     def __init__(self, name: str, position: tuple, size: tuple):
@@ -22,8 +29,8 @@ class PlayerEntity(Entity):
         self.caindo_no_buraco = False
         self.velocidade_queda = 5
         self.is_jumping = False
-        self.jump_speed = -20
-        self.gravity = 1
+        self.jump_speed = -18
+        self.gravity = 0.8
         self.vertical_speed = 0
         self.buraco_inicio = 540
         self.buraco_fim = 800
@@ -45,19 +52,13 @@ class PlayerEntity(Entity):
             print("💀 O jogador caiu no buraco!")
             self.caindo_no_buraco = True  # ativa a queda
 
-    def morrer(self):
-        # Aqui você pode definir o que acontece quando o jogador morre
-        print("Game Over")
-        pg.quit()
-        sys.exit()
-
     def update(self):
         if self.caindo_no_buraco:
             self.rect.y += self.velocidade_queda
             self.velocidade_queda += 1  # acelera a queda (gravidade)
 
             if self.rect.top > WIN_HEIGHT:  # saiu da tela
-                self.morrer()
+                die()
         else:
             self.move()
             # Aplica movimento vertical do pulo
