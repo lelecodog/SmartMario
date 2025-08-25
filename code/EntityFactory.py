@@ -1,12 +1,14 @@
 from code.Background import Background
-from code.Const import WIN_WIDTH
+from code.Const import WIN_WIDTH, WIN_HEIGHT
+from code.Enemy import Enemy
 from code.PlayerEntity import PlayerEntity
 
 
 class EntityFactory:
 
     @staticmethod
-    def get_entity(entity_name: str, position=(0, 0), size=(128, 158)):
+    def get_entity(entity_name: str, position=(0, 0), size=(WIN_WIDTH, WIN_HEIGHT)):
+        default_size = size
         match entity_name:
             case 'world1_bg':
                 list_bg = []
@@ -14,14 +16,26 @@ class EntityFactory:
                     name = f'world1_bg0{i}'
                     # Define a altura personalizada
                     if name == 'world1_bg03':
-                        y = -180  # valor negativo sobe a imagem
+                        y = -150  # valor negativo sobe a imagem
                     elif name == 'world1_bg02':
-                        y = -150
+                        y = -100
                     else:
                         y = 0
-                    list_bg.append(Background(name, (0, y)))
-                    list_bg.append(Background(name, (WIN_WIDTH, y)))
+
+                    # Tamanho personalizado apenas para world1_bg01
+                    if name == 'world1_bg01':
+                        size = (WIN_WIDTH, WIN_HEIGHT)
+                    else:
+                        size = default_size
+
+                    list_bg.append(Background(name, (0, y), size))
+                    list_bg.append(Background(name, (WIN_WIDTH, y), size))
                 return list_bg
             case 'Player':
-                return PlayerEntity('Player', (10, 650), (128, 158))
+                return PlayerEntity('Player', (10, 750), (128, 158))
+            case 'Enemy':
+                return Enemy('Enemy', (1010, 750), (128, 158))
+
+
+
 

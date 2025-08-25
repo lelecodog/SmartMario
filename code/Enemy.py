@@ -1,19 +1,21 @@
 import pygame as pg
 
 from code.Entity import Entity
-from code.Const import WIN_WIDTH, ENTITY_SPEED
 
 
-class Background(Entity):
-
+class Enemy(Entity):
     def __init__(self, name: str, position: tuple, size: tuple):
         super().__init__(name, position)
+
         imagem = pg.image.load(f'asset/{name}.png').convert_alpha()
+
+        # Redimensiona a imagem
         imagem_redimensionada = pg.transform.scale(imagem, size)
+
         self.surf = imagem_redimensionada
-        self.rect = self.surf.get_rect(topleft=position)
+        self.rect = self.surf.get_rect()
+        self.rect.bottomleft = position
 
     def move(self):
-        self.rect.centerx -= ENTITY_SPEED[self.name]
-        if self.rect.right <= 0:
-            self.rect.left = WIN_WIDTH
+        pass
+

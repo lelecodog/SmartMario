@@ -19,6 +19,7 @@ class World:
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity('world1_bg'))
         self.entity_list.append(EntityFactory.get_entity('Player'))
+        self.entity_list.append(EntityFactory.get_entity('Enemy'))
         self.timeout = 20000  # seconds
 
     def run(self):
