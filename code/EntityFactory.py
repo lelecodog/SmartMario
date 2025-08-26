@@ -33,7 +33,7 @@ class EntityFactory:
                     list_bg.append(Background(name, (WIN_WIDTH, y), size))
                 return list_bg
             case 'player':
-                return PlayerEntity('player', (10, 750), (128, 158))
+                return PlayerEntity('player', (100, 750), (128, 158))
             case 'enemy':
                 return Enemy('enemy', (1010, 750), (128, 158))
             case 'coin':

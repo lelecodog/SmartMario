@@ -2,6 +2,7 @@
 COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (255, 255, 255)
 COLOR_YELLOW = (255, 255, 0)
+COLOR_RED = (255, 0, 0)
 
 # E
 ENTITY_SPEED = {
@@ -13,6 +14,40 @@ ENTITY_SPEED = {
     'coin': 5
 
 }
+
+# L
+LEVEL_SETTINGS = [
+    {
+        "name": "Nível 1",
+        "min": 1,
+        "max": 9,
+        "operations": ["+"]
+    },
+    {
+        "name": "Nível 2",
+        "min": 1,
+        "max": 10,
+        "operations": ["+", "-"]
+    },
+    {
+        "name": "Nível 3",
+        "min": 2,
+        "max": 10,
+        "operations": ["+", "-", "*"]
+    },
+    {
+        "name": "Nível 4",
+        "min": 2,
+        "max": 50,
+        "operations": ["+", "-", "*"]
+    },
+    {
+        "name": "Nível 5",
+        "min": 2,
+        "max": 50,
+        "operations": ["+", "-", "*", "/"]
+    },
+]
 
 # W
 WIN_WIDTH = 1280

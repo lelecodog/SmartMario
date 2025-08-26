@@ -5,12 +5,21 @@ from pygame import Surface, Rect
 from pygame.font import Font
 
 from code.Coin import Coin
-from code.Const import COLOR_WHITE, WIN_HEIGHT, WIN_WIDTH
+from code.Const import COLOR_WHITE, WIN_HEIGHT, WIN_WIDTH, COLOR_RED, COLOR_BLACK
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 from code.Player import Player
 from code.PlayerEntity import PlayerEntity
 from code.QuestionFactory import QuestionFactory
+from code.Const import LEVEL_SETTINGS
+
+
+def generate_questions_for_level(level_index):
+    level = LEVEL_SETTINGS[level_index]
+    return [
+        QuestionFactory.generate_question(level["min"], level["max"], level["operations"])
+        for _ in range(5)
+    ]
 
 
 class World:
@@ -20,14 +29,20 @@ class World:
         self.name = name
         self.player = player
         self.entity_list: list[Entity] = []
+        # Introdutions
+        self.show_intro = True
+        self.intro_start_time = pg.time.get_ticks()
+        self.intro_duration = 4000
         # entites
         self.entity_list.extend(EntityFactory.get_entity('world1_bg'))
         self.mario = EntityFactory.get_entity('player')
         self.entity_list.append(self.mario)
         self.entity_list.append(EntityFactory.get_entity('enemy'))
-        # Questions
-        self.questions = [QuestionFactory().generate_question() for _ in range(5)]
+        # Levels
+        self.current_level_index = 0
         self.current_question_index = 0
+        self.questions_started = False
+        self.questions = generate_questions_for_level(self.current_level_index)
         self.question_text = ""
         # Sounds
         self.right_sound = pg.mixer.Sound('./asset/right.mp3')
@@ -35,8 +50,6 @@ class World:
         # Time question
         self.next_question_timer = None
         self.timeout = 20000
-        # Load first question
-        self.spawn_coins_for_question(self.questions[self.current_question_index])
 
     def run(self):
         pg.mixer_music.load('./asset/world1.mp3')
@@ -73,12 +86,28 @@ class World:
                     self.player.save()
                     pg.quit()
 
+            level_name = LEVEL_SETTINGS[self.current_level_index]["name"]
+            self.world_text(50, f'{level_name}', COLOR_RED, (WIN_WIDTH // 2 - 110, 300))
+
             # Printed text
             self.world_text(20, f'{self.name} - Timeout: {self.timeout / 1000 :.1f}s', COLOR_WHITE, (10, 5))
             self.world_text(20, f'fps: {clock.get_fps() :.0f}', COLOR_WHITE, (10, WIN_HEIGHT - 35))
             self.world_text(20, f'entidades: {len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))
             self.world_text(80, f'Pergunta: {self.question_text}', COLOR_WHITE, (190, 360))
-            self.world_text(60, f"Score: {self.player.score}", (255, 255, 0), (WIN_WIDTH - 200, 10))
+            self.world_text(60, f"Score: {self.player.score}", COLOR_BLACK, (WIN_WIDTH // 2 - 120, 250))
+
+            if self.show_intro:
+                elapsed = pg.time.get_ticks() - self.intro_start_time
+                if elapsed >= self.intro_duration:
+                    self.show_intro = False
+
+                    # 👉 Aqui começa a lógica das perguntas
+                    if not self.questions_started:
+                        self.questions_started = True
+                        self.load_next_question()
+                else:
+                    self.draw_intro_window()
+
             pg.display.flip()
 
     def world_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
@@ -86,6 +115,30 @@ class World:
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(left=text_pos[0], top=text_pos[1])
         self.window.blit(source=text_surf, dest=text_rect)
+
+    def draw_intro_window(self):
+        # Posição acima da cabeça do Mario
+        x = self.mario.rect.centerx - 150
+        y = self.mario.rect.top - 100
+        width = 300
+        height = 80
+
+        # Caixa de fundo
+        intro_rect = pg.Rect(x, y, width, height)
+        pg.draw.rect(self.window, (0, 0, 0), intro_rect)  # fundo preto
+        pg.draw.rect(self.window, (255, 255, 255), intro_rect, 2)  # borda branca
+
+        # Texto explicativo
+        font = pg.font.SysFont("Lucida Sans Typewriter", 20)
+        lines = [
+            "Bem-vindo ao desafio!",
+            "Pegue a moeda com a resposta certa.",
+            "Evite as erradas ou perca pontos!"
+        ]
+        for i, line in enumerate(lines):
+            text_surf = font.render(line, True, (255, 255, 255))
+            text_rect = text_surf.get_rect(center=(x + width // 2, y + 20 + i * 20))
+            self.window.blit(text_surf, text_rect)
 
     def draw_coin_value(self, coin):
         font = pg.font.SysFont("Lucida Sans Typewriter", 36)
@@ -107,16 +160,17 @@ class World:
                 self.entity_list.remove(entidade)
                 removed_coins = True
 
-        # Verifica se ainda há moedas
+        # heck if there are still coins
         if removed_coins and not any(isinstance(e, Coin) for e in self.entity_list):
             self.question_text = ""  # remove pergunta da tela
             if self.next_question_timer is None:
                 self.next_question_timer = pg.time.get_ticks()
 
+    # Remove coins that go off the screen
     def remove_offscreen_entities(self):
         removed_coins = False
         for entidade in self.entity_list[:]:
-            if entidade.rect.right < 0:  # saiu pela esquerda
+            if entidade.rect.right < 0:
                 self.entity_list.remove(entidade)
                 removed_coins = True
 
@@ -141,16 +195,18 @@ class World:
             self.entity_list.append(coin)
 
     def load_next_question(self):
-        self.current_question_index += 1
+        if self.questions_started:
+            self.current_question_index += 1
 
         if self.current_question_index >= len(self.questions):
-            self.end_game()  # ou mostrar tela de parabéns
-            return
+            self.current_level_index += 1
+            self.current_question_index = 0
 
-        self.entity_list.clear()
-        self.entity_list.extend(EntityFactory.get_entity('world1_bg'))
-        self.entity_list.append(self.mario)
-        self.entity_list.append(EntityFactory.get_entity('enemy'))
+            if self.current_level_index >= len(LEVEL_SETTINGS):
+                self.end_game()
+                return
+
+            self.questions = generate_questions_for_level(self.current_level_index)
 
         self.spawn_coins_for_question(self.questions[self.current_question_index])
 
