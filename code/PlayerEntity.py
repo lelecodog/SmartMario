@@ -1,16 +1,9 @@
 import sys
-
+import time
 import pygame as pg
 
-from code.Const import ENTITY_SPEED, WIN_HEIGHT
+from code.Const import ENTITY_SPEED, WIN_HEIGHT, COLOR_RED
 from code.Entity import Entity
-
-
-def die():
-    # Aqui você pode definir o que acontece quando o jogador morre
-    print("Game Over")
-    pg.quit()
-    sys.exit()
 
 
 class PlayerEntity(Entity):
@@ -35,30 +28,56 @@ class PlayerEntity(Entity):
         self.buraco_inicio = 540
         self.buraco_fim = 800
         self.chao_y = 750
+        self.jump_sound = pg.mixer.Sound('./asset/jump-up.mp3')
+        self.game_over_sound = pg.mixer.Sound('./asset/game-over.mp3')
+        self.space_pressed_last_frame = False
 
     def move(self):
         pressed_key = pg.key.get_pressed()
+        click_key = pg.key.get_pressed()[pg.K_SPACE] and not self.space_pressed_last_frame
         if pressed_key[pg.K_RIGHT]:
             self.rect.x += ENTITY_SPEED[self.name]
-        self.check_fall()
+
         if pressed_key[pg.K_LEFT] and self.rect.left > 0:
             self.rect.x -= ENTITY_SPEED[self.name]
-        if pressed_key[pg.K_SPACE] and not self.is_jumping:
+        self.check_fall()
+
+        if click_key and not self.is_jumping:
             self.is_jumping = True
+            self.jump_sound.play()
             self.vertical_speed = self.jump_speed
+        self.space_pressed_last_frame = pressed_key[pg.K_SPACE]
+
+    def die(self, screen):
+        pg.mixer_music.stop()
+        self.game_over_sound.play()
+
+        screen.fill((0, 0, 0))
+
+        font = pg.font.SysFont("Arial", 100)
+        text = font.render("GAME OVER!", True, COLOR_RED)
+        text_rect = text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
+        screen.blit(text, text_rect)
+
+        pg.display.flip()
+
+        pg.time.delay(5000)
+        pg.mixer.stop()
+        return
 
     def check_fall(self):
         if self.buraco_inicio < self.rect.centerx < self.buraco_fim and self.rect.bottom >= self.chao_y:
             print("💀 O jogador caiu no buraco!")
             self.caindo_no_buraco = True  # ativa a queda
 
-    def update(self):
+    def update(self, screen):
         if self.caindo_no_buraco:
             self.rect.y += self.velocidade_queda
             self.velocidade_queda += 1  # acelera a queda (gravidade)
 
             if self.rect.top > WIN_HEIGHT:  # saiu da tela
-                die()
+                self.die(screen)
+                return "dead"
         else:
             self.move()
             # Aplica movimento vertical do pulo
@@ -71,4 +90,4 @@ class PlayerEntity(Entity):
                     self.rect.bottom = self.chao_y
                     self.is_jumping = False
                     self.vertical_speed = 0
-
+        return "alive"

@@ -25,6 +25,7 @@ def generate_questions_for_level(level_index):
 class World:
 
     def __init__(self, window, name, player: Player):
+        self.game_over = False
         self.window = window
         self.name = name
         self.player = player
@@ -32,11 +33,11 @@ class World:
         # Introdutions
         self.show_intro = True
         self.intro_start_time = pg.time.get_ticks()
-        self.intro_duration = 4000
+        self.intro_duration = 6000
         # entites
         self.entity_list.extend(EntityFactory.get_entity('world1_bg'))
-        self.mario = EntityFactory.get_entity('player')
-        self.entity_list.append(self.mario)
+        self.player_entity = EntityFactory.get_entity('player')
+        self.entity_list.append(self.player_entity)
         self.entity_list.append(EntityFactory.get_entity('enemy'))
         # Levels
         self.current_level_index = 0
@@ -68,9 +69,15 @@ class World:
 
                 # Se a entidade for o jogador, chama update()
                 if hasattr(ent, "update"):
-                    ent.update()
+                    status = ent.update(self.window)
+                    if status == "dead":
+                        return
                 else:
                     ent.move()
+
+            if not self.game_over and self.player.score <= 0:
+                self.player_entity.die(self.window)
+                return
 
             self.check_coin_collision()
             self.remove_offscreen_entities()
@@ -118,10 +125,10 @@ class World:
 
     def draw_intro_window(self):
         # Posição acima da cabeça do Mario
-        x = self.mario.rect.centerx - 150
-        y = self.mario.rect.top - 100
-        width = 300
-        height = 80
+        x = self.player_entity.rect.centerx - 150
+        y = self.player_entity.rect.top - 150
+        width = 400
+        height = 120
 
         # Caixa de fundo
         intro_rect = pg.Rect(x, y, width, height)
@@ -129,11 +136,13 @@ class World:
         pg.draw.rect(self.window, (255, 255, 255), intro_rect, 2)  # borda branca
 
         # Texto explicativo
-        font = pg.font.SysFont("Lucida Sans Typewriter", 20)
+        font = pg.font.SysFont("Lucida Sans Typewriter", 30)
         lines = [
             "Bem-vindo ao desafio!",
             "Pegue a moeda com a resposta certa.",
-            "Evite as erradas ou perca pontos!"
+            "Evite as erradas ou perca pontos!",
+            "Aperte Space para pular ",
+            "setas para mover"
         ]
         for i, line in enumerate(lines):
             text_surf = font.render(line, True, (255, 255, 255))
@@ -149,7 +158,7 @@ class World:
     def check_coin_collision(self):
         removed_coins = False
         for entidade in self.entity_list[:]:  # cópia para evitar problemas ao remover
-            if isinstance(entidade, Coin) and self.mario.rect.colliderect(entidade.rect):
+            if isinstance(entidade, Coin) and self.player_entity.rect.colliderect(entidade.rect):
                 if entidade.is_correct:
                     self.right_sound.play()
                     self.player.add_score(1)

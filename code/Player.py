@@ -8,7 +8,7 @@ def player_list():
 class Player:
     def __init__(self, name):
         self.name = name
-        self.score = 0
+        self.score = 10
         self.unlocked_worlds = ['world1']  # Start with first world unlocked
 
     def add_score(self, points):
