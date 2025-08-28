@@ -8,8 +8,10 @@ from code.Player import Player
 
 def list_saved_players():
     try:
-        return [f.replace('.json', '') for f in os.listdir('players') if f.endswith('.json')]
-    except FileNotFoundError:
+        with open("score.json", "r") as f:
+            data = json.load(f)
+        return list(set(entry["name"] for entry in data))
+    except (FileNotFoundError, json.JSONDecodeError):
         return []
 
 
@@ -35,8 +37,9 @@ class PlayerSelector:
         self.input_active = False
 
         # Players list
-        self.players = list_saved_players()
-        self.selected_index = -1
+        self.players = ["<DIGITAR NOME!>"] + list_saved_players()
+        self.selected_index = 0
+        self.input_active = True
 
     def run(self):
         pg.mixer_music.load('./asset/menu.mp3')
@@ -53,8 +56,15 @@ class PlayerSelector:
             self.window.blit(title_text, title_rect)
 
             # Text camp
-            pg.draw.rect(self.window, COLOR_WHITE, self.input_box, 2)
-            input_surface = self.input_font.render(self.input_text, True, COLOR_WHITE)
+            if self.selected_index == 0:
+                border_color = COLOR_YELLOW
+                cursor = "|" if pg.time.get_ticks() // 500 % 2 == 0 else ""  # pisca a cada 500ms
+                input_surface = self.input_font.render(self.input_text + cursor, True, COLOR_WHITE)
+            else:
+                border_color = COLOR_WHITE
+                input_surface = self.input_font.render(self.input_text, True, COLOR_WHITE)
+
+            pg.draw.rect(self.window, border_color, self.input_box, 2)
             self.window.blit(input_surface, (self.input_box.x + 10, self.input_box.y + 5))
 
             # Player list
@@ -88,27 +98,44 @@ class PlayerSelector:
                             self.selected_index = i
                             pg.mixer.Sound('./asset/select-option.mp3').play()
                 elif event.type == pg.KEYDOWN:
-                    if self.input_active:
+                    if self.selected_index == 0:
+                        self.input_active = True
                         if event.key == pg.K_RETURN:
                             name = self.input_text.strip()
                             if name:
-                                player = Player.load(name)
-                                if not player:
-                                    player = Player(name)
-                                    print(f"Novo jogador '{name}' criado!")
+                                player = Player(name)
+                                print(f"Nova sessão iniciada para '{name}'")
                                 return player
                         elif event.key == pg.K_BACKSPACE:
                             self.input_text = self.input_text[:-1]
+                        elif event.key == pg.K_DOWN:
+                            if len(self.players) > 1:
+                                self.selected_index = 1
+                                self.input_active = False
+                                self.input_text = self.players[self.selected_index]
+                                pg.mixer.Sound('./asset/select-option.mp3').play()
                         else:
                             self.input_text += event.unicode
                     else:
-                        if event.key == pg.K_RETURN and self.selected_index >= 0:
+                        self.input_active = False
+                        if event.key == pg.K_UP:
+                            self.selected_index -= 1
+                            if self.selected_index < 0:
+                                self.selected_index = 0
+                            self.input_active = self.selected_index == 0
+                            self.input_text = "" if self.input_active else self.players[self.selected_index]
+                            pg.mixer.Sound('./asset/select-option.mp3').play()
+                        elif event.key == pg.K_DOWN:
+                            self.selected_index += 1
+                            if self.selected_index >= len(self.players):
+                                self.selected_index = len(self.players) - 1
+                            self.input_active = self.selected_index == 0
+                            self.input_text = "" if self.input_active else self.players[self.selected_index]
+                            pg.mixer.Sound('./asset/select-option.mp3').play()
+                        elif event.key == pg.K_RETURN:
                             name = self.players[self.selected_index]
-                            player = Player.load(name)
+                            player = Player(name)
+                            print(f"Nova sessão iniciada para '{name}'")
                             return player
 
             clock.tick(30)
-
-
-
-

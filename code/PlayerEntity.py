@@ -2,13 +2,14 @@ import sys
 import time
 import pygame as pg
 
-from code.Const import ENTITY_SPEED, WIN_HEIGHT, COLOR_RED
+from code.Const import ENTITY_SPEED, WIN_HEIGHT, COLOR_RED, COLOR_WHITE
 from code.Entity import Entity
+from code.Player import Player
 
 
 class PlayerEntity(Entity):
 
-    def __init__(self, name: str, position: tuple, size: tuple):
+    def __init__(self, player: Player, name: str, position: tuple, size: tuple):
         super().__init__(name, position)
 
         imagem = pg.image.load(f'asset/{name}.png').convert_alpha()
@@ -16,6 +17,7 @@ class PlayerEntity(Entity):
         # Redimensiona a imagem
         imagem_redimensionada = pg.transform.scale(imagem, size)
 
+        self.player = player
         self.surf = imagem_redimensionada
         self.rect = self.surf.get_rect()
         self.rect.bottomleft = position
@@ -30,6 +32,7 @@ class PlayerEntity(Entity):
         self.chao_y = 750
         self.jump_sound = pg.mixer.Sound('./asset/jump-up.mp3')
         self.game_over_sound = pg.mixer.Sound('./asset/game-over.mp3')
+        self.win_sound = pg.mixer.Sound('./asset/win.mp3')
         self.space_pressed_last_frame = False
 
     def move(self):
@@ -58,6 +61,25 @@ class PlayerEntity(Entity):
         text = font.render("GAME OVER!", True, COLOR_RED)
         text_rect = text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
         screen.blit(text, text_rect)
+
+        pg.display.flip()
+
+        pg.time.delay(5000)
+        pg.mixer.stop()
+        return
+
+    def show_victory_screen(self, screen):
+        pg.mixer_music.stop()
+        self.win_sound.play()
+
+        screen.fill((0, 0, 0))
+
+        font = pg.font.SysFont("Arial", 60)
+        small_font = pg.font.SysFont("Arial", 40)
+        text = font.render("CONGRATULATIONS", True, COLOR_WHITE)
+        score_text = small_font.render(f"YOUR SCORE: {self.player.score}", True, COLOR_WHITE)
+        screen.blit(text, (screen.get_width() // 2 - text.get_width() // 2, 200))
+        screen.blit(score_text, (screen.get_width() // 2 - score_text.get_width() // 2, 300))
 
         pg.display.flip()
 

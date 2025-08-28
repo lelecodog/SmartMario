@@ -23,30 +23,7 @@ LEVEL_SETTINGS = [
         "max": 9,
         "operations": ["+"]
     },
-    {
-        "name": "Nível 2",
-        "min": 1,
-        "max": 10,
-        "operations": ["+", "-"]
-    },
-    {
-        "name": "Nível 3",
-        "min": 2,
-        "max": 10,
-        "operations": ["+", "-", "*"]
-    },
-    {
-        "name": "Nível 4",
-        "min": 2,
-        "max": 50,
-        "operations": ["+", "-", "*"]
-    },
-    {
-        "name": "Nível 5",
-        "min": 2,
-        "max": 50,
-        "operations": ["+", "-", "*", "/"]
-    },
+
 ]
 
 # W
@@ -55,3 +32,27 @@ WIN_HEIGHT = 956
 
 
 
+#    {
+#         "name": "Nível 2",
+#         "min": 1,
+#         "max": 10,
+#         "operations": ["+", "-"]
+#     },
+#     {
+#         "name": "Nível 3",
+#         "min": 2,
+#         "max": 10,
+#         "operations": ["+", "-", "*"]
+#     },
+#     {
+#         "name": "Nível 4",
+#         "min": 2,
+#         "max": 50,
+#         "operations": ["+", "-", "*"]
+#     },
+#     {
+#         "name": "Nível 5",
+#         "min": 2,
+#         "max": 50,
+#         "operations": ["+", "-", "*", "/"]
+#     },

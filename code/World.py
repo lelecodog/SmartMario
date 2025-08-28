@@ -1,6 +1,7 @@
 import pygame as pg
 import sys
 
+from datetime import datetime
 from pygame import Surface, Rect
 from pygame.font import Font
 
@@ -18,7 +19,7 @@ def generate_questions_for_level(level_index):
     level = LEVEL_SETTINGS[level_index]
     return [
         QuestionFactory.generate_question(level["min"], level["max"], level["operations"])
-        for _ in range(5)
+        for _ in range(2)
     ]
 
 
@@ -36,7 +37,7 @@ class World:
         self.intro_duration = 6000
         # entites
         self.entity_list.extend(EntityFactory.get_entity('world1_bg'))
-        self.player_entity = EntityFactory.get_entity('player')
+        self.player_entity = EntityFactory.get_entity('player', player=player)
         self.entity_list.append(self.player_entity)
         self.entity_list.append(EntityFactory.get_entity('enemy'))
         # Levels
@@ -51,6 +52,7 @@ class World:
         # Time question
         self.next_question_timer = None
         self.timeout = 20000
+        self.game_ended = False
 
     def run(self):
         pg.mixer_music.load('./asset/world1.mp3')
@@ -58,6 +60,8 @@ class World:
         clock = pg.time.Clock()
         running = True
         while running:
+            if self.game_ended:
+                return
             clock.tick(60)
             self.window.fill((0, 0, 0))  # Limpa a tela
 
@@ -90,9 +94,10 @@ class World:
 
             for event in pg.event.get():
                 if event.type == pg.QUIT:
-                    self.player.save()
                     pg.quit()
 
+            if self.current_level_index >= len(LEVEL_SETTINGS):
+                return
             level_name = LEVEL_SETTINGS[self.current_level_index]["name"]
             self.world_text(50, f'{level_name}', COLOR_RED, (WIN_WIDTH // 2 - 110, 300))
 
@@ -193,7 +198,7 @@ class World:
 
         for i, value in enumerate(question_data["options"]):
             is_correct = value == question_data["correct"]
-            position = (900 + i * 1300, 670)
+            position = (900 + i * 700, 670)
             coin = EntityFactory.get_entity(
                 'coin',
                 position=position,
@@ -220,4 +225,7 @@ class World:
         self.spawn_coins_for_question(self.questions[self.current_question_index])
 
     def end_game(self):
-        pass
+        self.game_ended = True
+        self.player_entity.show_victory_screen(self.window)
+        self.player.save(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        pg.time.set_timer(pg.USEREVENT + 1, 5000)

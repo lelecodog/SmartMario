@@ -8,7 +8,8 @@ from code.PlayerEntity import PlayerEntity
 class EntityFactory:
 
     @staticmethod
-    def get_entity(entity_name: str, position=(0, 0), size=(WIN_WIDTH, WIN_HEIGHT), is_correct=False, value=None):
+    def get_entity(entity_name: str, position=(0, 0), size=(WIN_WIDTH, WIN_HEIGHT), is_correct=False,
+                   value=None, player=None):
         default_size = size
         match entity_name:
             case 'world1_bg':
@@ -33,11 +34,15 @@ class EntityFactory:
                     list_bg.append(Background(name, (WIN_WIDTH, y), size))
                 return list_bg
             case 'player':
-                return PlayerEntity('player', (100, 750), (128, 158))
+                if player is None:
+                    raise ValueError("O parâmetro 'player' é obrigatório para criar PlayerEntity.")
+                return PlayerEntity(player, 'player', (100, 750), (128, 158))
             case 'enemy':
                 return Enemy('enemy', (1010, 750), (128, 158))
             case 'coin':
                 return Coin('coin', value, is_correct, position, size)
+            case _:
+                raise ValueError(f"Entidade desconhecida: {entity_name}")
             
 
 

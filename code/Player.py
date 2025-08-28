@@ -1,8 +1,17 @@
-import json, os
+import json
+import os
+from datetime import datetime
+
+
+SCORE_FILE = "score.json"
 
 
 def player_list():
-    return [f[:-5] for f in os.listdir() if f.endswith('.json')]
+    if not os.path.exists(SCORE_FILE):
+        return []
+    with open(SCORE_FILE, 'r') as f:
+        data = json.load(f)
+    return list(data.keys())
 
 
 class Player:
@@ -21,24 +30,45 @@ class Player:
     def __str__(self):
         return f"Jogador: {self.name} | Score: {self.score} | Níveis desbloqueados: {self.unlocked_worlds}"
 
-    def save(self):
-        data = {
+    def save(self, timestamp=None):
+        if timestamp is None:
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # Carrega todos os dados existentes
+        try:
+            with open("score.json", "r") as f:
+                all_data = json.load(f)
+            if not isinstance(all_data, list):
+                all_data = []  # corrige se estiver errado
+        except (FileNotFoundError, json.JSONDecodeError):
+            all_data = []
+
+        # Atualiza ou adiciona o jogador atual
+        all_data.append({
             'name': self.name,
             'score': self.score,
-            'unlocked_worlds': self.unlocked_worlds
-        }
-        with open(f'{self.name}.json', 'w') as f:
-            json.dump(data, f)
+            'unlocked_worlds': self.unlocked_worlds,
+            'last_played': timestamp
+        })
+
+        # Salva tudo de volta
+        with open(SCORE_FILE, 'w') as f:
+            json.dump(all_data, f, indent=4)
 
     @staticmethod
     def load(name):
-        try:
-            with open(f'{name}.json', 'r') as f:
-                data = json.load(f)
-                player = Player(data['name'])
-                player.score = data['score']
-                player.unlocked_worlds = data['unlocked_worlds']
-                return player
-        except FileNotFoundError:
+        if not os.path.exists(SCORE_FILE):
             return None
+
+        with open(SCORE_FILE, 'r') as f:
+            all_data = json.load(f)
+
+        if name not in all_data:
+            return None
+
+        data = all_data[name]
+        player = Player(name)
+        player.score = data['score']
+        player.unlocked_worlds = data['unlocked_worlds']
+        player.last_played = data.get('last_played', 'N/A')
+        return player
 
