@@ -19,7 +19,7 @@ def generate_questions_for_level(level_index):
     level = LEVEL_SETTINGS[level_index]
     return [
         QuestionFactory.generate_question(level["min"], level["max"], level["operations"])
-        for _ in range(2)
+        for _ in range(3)
     ]
 
 
@@ -176,7 +176,7 @@ class World:
 
         # heck if there are still coins
         if removed_coins and not any(isinstance(e, Coin) for e in self.entity_list):
-            self.question_text = ""  # remove pergunta da tela
+            self.question_text = ""  # remove question
             if self.next_question_timer is None:
                 self.next_question_timer = pg.time.get_ticks()
 

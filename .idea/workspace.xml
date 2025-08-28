@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc523798-06c8-4f7d-b6ac-78050be61917" name="Changes" comment="Created method die">
-      <change afterPath="$PROJECT_DIR$/asset/win.mp3" afterDir="false" />
+    <list default="true" id="bc523798-06c8-4f7d-b6ac-78050be61917" name="Changes" comment="Created method end game">
+      <change afterPath="$PROJECT_DIR$/code/Score.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/Const.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Const.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/EntityFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/EntityFactory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/PlayerEntity.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/PlayerEntity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/PlayerSelector.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/PlayerSelector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/World.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/World.py" afterDir="false" />
     </list>
@@ -197,7 +195,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756249213288</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Created method end game">
+      <option name="closed" value="true" />
+      <created>1756407497616</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1756407497616</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -224,6 +230,7 @@
     <MESSAGE value="Created class Coin, QuestionFactory," />
     <MESSAGE value="changing QuestionFactory," />
     <MESSAGE value="Created method die" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created method die" />
+    <MESSAGE value="Created method end game" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created method end game" />
   </component>
 </project>

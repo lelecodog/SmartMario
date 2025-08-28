@@ -1,6 +1,7 @@
 import pygame as pg
 
 from code.Const import WIN_WIDTH, WIN_HEIGHT
+from code.Score import Score
 from code.World import World
 from code.Menu import Menu
 from code.Player import Player
@@ -35,11 +36,13 @@ class Game:
                 world = World(self.window, 'world1', player)
                 world.run()
 
-            elif menu_return == self.options[2]:
-                pg.quit()  # Close Window
-                quit()  # End Pygame
-            else:
-                pass
+            elif menu_return == self.options[1]:  # "SCORE"
+                score_screen = Score(self.window)
+                score_screen.run()
+
+            else:  # "EXIT"
+                pg.quit()
+                quit()
 
 
 
