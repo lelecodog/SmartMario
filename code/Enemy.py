@@ -7,15 +7,12 @@ class Enemy(Entity):
     def __init__(self, name: str, position: tuple, size: tuple):
         super().__init__(name, position)
 
-        imagem = pg.image.load(f'asset/{name}.png').convert_alpha()
+        image = pg.image.load(f'asset/{name}.png').convert_alpha()
+        resized_image = pg.transform.scale(image, size)
 
-        # Redimensiona a imagem
-        imagem_redimensionada = pg.transform.scale(imagem, size)
-
-        self.surf = imagem_redimensionada
+        self.surf = resized_image
         self.rect = self.surf.get_rect()
         self.rect.bottomleft = position
 
     def move(self):
         pass
-

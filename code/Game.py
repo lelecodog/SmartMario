@@ -9,11 +9,10 @@ from code.PlayerSelector import PlayerSelector
 
 
 def select_player():
-    name = input("Digite o nome do jogador: ")
+    name = input("Enter the player's name: ")
     player = Player.load(name)
     if not player:
         player = Player(name)
-        print("Novo jogador criado!")
     return player
 
 
@@ -43,6 +42,3 @@ class Game:
             else:  # "EXIT"
                 pg.quit()
                 quit()
-
-
-

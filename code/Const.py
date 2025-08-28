@@ -12,8 +12,7 @@ ENTITY_SPEED = {
     'world1_bg03': 2,
     'world1_bg04': 2,
     'player': 4,
-    'coin': 5
-
+    'coin': 6
 }
 
 # L
@@ -24,36 +23,32 @@ LEVEL_SETTINGS = [
         "max": 9,
         "operations": ["+"]
     },
-
+    {
+        "name": "Nível 2",
+        "min": 2,
+        "max": 10,
+        "operations": ["+", "-"]
+    },
+    {
+        "name": "Nível 3",
+        "min": 10,
+        "max": 50,
+        "operations": ["+", "-"]
+    },
+    {
+        "name": "Nível 4",
+        "min": 1,
+        "max": 9,
+        "operations": ["*"]
+    },
+    {
+        "name": "Nível 5",
+        "min": 2,
+        "max": 10,
+        "operations": ["/"]
+    },
 ]
 
 # W
 WIN_WIDTH = 1280
 WIN_HEIGHT = 956
-
-
-
-#    {
-#         "name": "Nível 2",
-#         "min": 1,
-#         "max": 10,
-#         "operations": ["+", "-"]
-#     },
-#     {
-#         "name": "Nível 3",
-#         "min": 2,
-#         "max": 10,
-#         "operations": ["+", "-", "*"]
-#     },
-#     {
-#         "name": "Nível 4",
-#         "min": 2,
-#         "max": 50,
-#         "operations": ["+", "-", "*"]
-#     },
-#     {
-#         "name": "Nível 5",
-#         "min": 2,
-#         "max": 50,
-#         "operations": ["+", "-", "*", "/"]
-#     },

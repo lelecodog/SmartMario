@@ -1,5 +1,6 @@
 import random
 
+
 class QuestionFactory:
     @staticmethod
     def generate_question(min_val, max_val, operations):
@@ -7,23 +8,31 @@ class QuestionFactory:
         a = random.randint(min_val, max_val)
         b = random.randint(min_val, max_val)
 
-        # Garante que divisão resulte em inteiro
         if op == "/":
             b = random.randint(1, max_val)
-            a = b * random.randint(min_val, max_val)
-            correct = a // b
+            correct = random.randint(min_val, max_val)
+            a = b * correct
             question_text = f"{a} ÷ {b} = "
+
         elif op == "+":
+            a = random.randint(min_val, max_val)
+            b = random.randint(min_val, max_val)
             correct = a + b
             question_text = f"{a} + {b} = "
+
         elif op == "-":
+            a = random.randint(min_val, max_val)
+            b = random.randint(min_val, a)
             correct = a - b
             question_text = f"{a} - {b} = "
+
         elif op == "*":
+            a = random.randint(min_val, max_val)
+            b = random.randint(min_val, max_val)
             correct = a * b
             question_text = f"{a} × {b} = "
 
-        # Gera respostas erradas
+        # Generate wrong answers
         wrong1 = correct + random.choice([-3, -2, -1, 1, 2, 3])
         wrong2 = correct + random.choice([-3, -2, -1, 1, 2, 3])
         while wrong1 == correct or wrong2 == correct or wrong1 == wrong2:
@@ -38,4 +47,3 @@ class QuestionFactory:
             "correct": correct,
             "options": options
         }
-

@@ -59,7 +59,7 @@ class Score:
 
             # Back button
             pg.draw.rect(self.window, COLOR_YELLOW, self.back_rect, 2)
-            back_text = self.back_font.render("< VOLTAR", True, COLOR_YELLOW)
+            back_text = self.back_font.render("< BACK >", True, COLOR_YELLOW)
             self.window.blit(back_text, (self.back_rect.x + 10, self.back_rect.y + 5))
 
             pg.display.flip()

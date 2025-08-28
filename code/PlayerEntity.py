@@ -1,5 +1,3 @@
-import sys
-import time
 import pygame as pg
 
 from code.Const import ENTITY_SPEED, WIN_HEIGHT, COLOR_RED, COLOR_WHITE
@@ -12,23 +10,21 @@ class PlayerEntity(Entity):
     def __init__(self, player: Player, name: str, position: tuple, size: tuple):
         super().__init__(name, position)
 
-        imagem = pg.image.load(f'asset/{name}.png').convert_alpha()
-
-        # Redimensiona a imagem
-        imagem_redimensionada = pg.transform.scale(imagem, size)
+        image = pg.image.load(f'asset/{name}.png').convert_alpha()
+        resized_image = pg.transform.scale(image, size)
 
         self.player = player
-        self.surf = imagem_redimensionada
+        self.surf = resized_image
         self.rect = self.surf.get_rect()
         self.rect.bottomleft = position
-        self.caindo_no_buraco = False
-        self.velocidade_queda = 5
+        self.fall = False
+        self.fall_speed = 5
         self.is_jumping = False
         self.jump_speed = -18
         self.gravity = 0.8
         self.vertical_speed = 0
-        self.buraco_inicio = 540
-        self.buraco_fim = 800
+        self.hole_start = 540
+        self.hole_end = 800
         self.chao_y = 750
         self.jump_sound = pg.mixer.Sound('./asset/jump-up.mp3')
         self.game_over_sound = pg.mixer.Sound('./asset/game-over.mp3')
@@ -88,27 +84,26 @@ class PlayerEntity(Entity):
         return
 
     def check_fall(self):
-        if self.buraco_inicio < self.rect.centerx < self.buraco_fim and self.rect.bottom >= self.chao_y:
-            print("💀 O jogador caiu no buraco!")
-            self.caindo_no_buraco = True  # ativa a queda
+        if self.hole_start < self.rect.centerx < self.hole_end and self.rect.bottom >= self.chao_y:
+            self.fall = True
 
     def update(self, screen):
-        if self.caindo_no_buraco:
-            self.rect.y += self.velocidade_queda
-            self.velocidade_queda += 1  # acelera a queda (gravidade)
+        if self.fall:
+            self.rect.y += self.fall_speed
+            self.fall_speed += 1
 
-            if self.rect.top > WIN_HEIGHT:  # saiu da tela
+            if self.rect.top > WIN_HEIGHT:
                 self.die(screen)
                 return "dead"
         else:
             self.move()
-            # Aplica movimento vertical do pulo
+            # Applies vertical jump movement
             if self.is_jumping:
                 self.rect.y += self.vertical_speed
                 self.vertical_speed += self.gravity
 
-                # Simula aterrissagem (ajuste conforme seu chão)
-                if self.rect.bottom >= self.chao_y and self.vertical_speed > 0:  # altura do chão
+                # Simulates landing
+                if self.rect.bottom >= self.chao_y and self.vertical_speed > 0:
                     self.rect.bottom = self.chao_y
                     self.is_jumping = False
                     self.vertical_speed = 0

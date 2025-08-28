@@ -8,9 +8,9 @@ class Background(Entity):
 
     def __init__(self, name: str, position: tuple, size: tuple):
         super().__init__(name, position)
-        imagem = pg.image.load(f'asset/{name}.png').convert_alpha()
-        imagem_redimensionada = pg.transform.scale(imagem, size)
-        self.surf = imagem_redimensionada
+        image = pg.image.load(f'asset/{name}.png').convert_alpha()
+        resized_image = pg.transform.scale(image, size)
+        self.surf = resized_image
         self.rect = self.surf.get_rect(topleft=position)
 
     def move(self):

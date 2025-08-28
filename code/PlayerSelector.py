@@ -1,8 +1,6 @@
 import pygame as pg
-import os
 import json
 from code.Const import COLOR_WHITE, COLOR_BLACK, COLOR_YELLOW
-from code.World import World
 from code.Player import Player
 
 
@@ -37,7 +35,7 @@ class PlayerSelector:
         self.input_active = False
 
         # Players list
-        self.players = ["<DIGITAR NOME!>"] + list_saved_players()
+        self.players = ["<ENTER NAME!>"] + list_saved_players()
         self.selected_index = 0
         self.input_active = True
 
@@ -58,7 +56,7 @@ class PlayerSelector:
             # Text camp
             if self.selected_index == 0:
                 border_color = COLOR_YELLOW
-                cursor = "|" if pg.time.get_ticks() // 500 % 2 == 0 else ""  # pisca a cada 500ms
+                cursor = "|" if pg.time.get_ticks() // 500 % 2 == 0 else ""  # flashes every 500ms
                 input_surface = self.input_font.render(self.input_text + cursor, True, COLOR_WHITE)
             else:
                 border_color = COLOR_WHITE
@@ -104,7 +102,6 @@ class PlayerSelector:
                             name = self.input_text.strip()
                             if name:
                                 player = Player(name)
-                                print(f"Nova sessão iniciada para '{name}'")
                                 return player
                         elif event.key == pg.K_BACKSPACE:
                             self.input_text = self.input_text[:-1]
@@ -135,7 +132,6 @@ class PlayerSelector:
                         elif event.key == pg.K_RETURN:
                             name = self.players[self.selected_index]
                             player = Player(name)
-                            print(f"Nova sessão iniciada para '{name}'")
                             return player
 
             clock.tick(30)

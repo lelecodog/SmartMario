@@ -39,17 +39,18 @@ class Menu:
 
             # Render menu options with dynamic color
             for i, option in enumerate(self.options):
-                color = COLOR_YELLOW if i == self.selected_option else COLOR_WHITE
-                text = self.menu_font.render(option, True, color)
-                text_rect = text.get_rect(center=(self.window.get_width() // 2, 400 + i * 100))
-                self.window.blit(text, text_rect)
+                text_rect = self.menu_font.render(option, True, COLOR_WHITE).get_rect(
+                    center=(self.window.get_width() // 2, 400 + i * 100)
+                )
 
                 # Detect if mouse is hovering over the text
                 if text_rect.collidepoint(pg.mouse.get_pos()):
-                    color = COLOR_YELLOW
-                    self.selected_option = i  # Actualize option with mouse
-                else:
-                    color = COLOR_WHITE
+                    self.selected_option = i
+
+                color = COLOR_YELLOW if i == self.selected_option else COLOR_WHITE
+
+                text = self.menu_font.render(option, True, color)
+                self.window.blit(text, text_rect)
 
             pg.display.flip()
 
@@ -58,6 +59,16 @@ class Menu:
                 if event.type == pg.QUIT:
                     pg.quit()  # Close Window
                     quit()  # End Pygame
+
+                if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+                    mouse_pos = pg.mouse.get_pos()
+                    for i, option in enumerate(self.options):
+                        text_rect = self.menu_font.render(option, True, COLOR_WHITE).get_rect(
+                            center=(self.window.get_width() // 2, 400 + i * 100)
+                        )
+                        if text_rect.collidepoint(mouse_pos):
+                            pg.mixer.Sound('./asset/select-option.mp3').play()
+                            return self.options[i]
 
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_DOWN:

@@ -28,21 +28,20 @@ class Player:
             self.unlocked_worlds.append(level_name)
 
     def __str__(self):
-        return f"Jogador: {self.name} | Score: {self.score} | Níveis desbloqueados: {self.unlocked_worlds}"
+        return f"Player: {self.name} | Score: {self.score} | World unlocked: {self.unlocked_worlds}"
 
     def save(self, timestamp=None):
         if timestamp is None:
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        # Carrega todos os dados existentes
         try:
             with open("score.json", "r") as f:
                 all_data = json.load(f)
             if not isinstance(all_data, list):
-                all_data = []  # corrige se estiver errado
+                all_data = []
         except (FileNotFoundError, json.JSONDecodeError):
             all_data = []
 
-        # Atualiza ou adiciona o jogador atual
+        # Updates or adds the current player
         all_data.append({
             'name': self.name,
             'score': self.score,
@@ -50,7 +49,7 @@ class Player:
             'last_played': timestamp
         })
 
-        # Salva tudo de volta
+        # Save
         with open(SCORE_FILE, 'w') as f:
             json.dump(all_data, f, indent=4)
 
@@ -71,4 +70,3 @@ class Player:
         player.unlocked_worlds = data['unlocked_worlds']
         player.last_played = data.get('last_played', 'N/A')
         return player
-
