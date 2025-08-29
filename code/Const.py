@@ -47,6 +47,12 @@ LEVEL_SETTINGS = [
         "max": 10,
         "operations": ["/"]
     },
+    {
+        "name": "Nível 6",
+        "min": 5,
+        "max": 20,
+        "operations": ["/", "*"]
+    },
 ]
 
 # W

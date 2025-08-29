@@ -4,22 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc523798-06c8-4f7d-b6ac-78050be61917" name="Changes" comment="Created class Score.py">
+    <list default="true" id="bc523798-06c8-4f7d-b6ac-78050be61917" name="Changes" comment="Final adjustments">
+      <change afterPath="$PROJECT_DIR$/asset/icon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Background.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Background.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Coin.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Coin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/Const.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Const.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Enemy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/EntityFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/EntityFactory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/PlayerEntity.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/PlayerEntity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/PlayerSelector.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/PlayerSelector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/QuestionFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/QuestionFactory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Score.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/World.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/World.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,21 +35,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Enemy.executor": "Run",
-    "Python.EntityFactory.executor": "Run",
-    "Python.Game.executor": "Run",
-    "Python.Menu.executor": "Run",
-    "Python.PlayerEntity.executor": "Run",
-    "Python.QuestionFactory.executor": "Run",
-    "Python.World.executor": "Run",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/ProjetosPython/SmartMario/asset"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Enemy.executor&quot;: &quot;Run&quot;,
+    &quot;Python.EntityFactory.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Game.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Menu.executor&quot;: &quot;Run&quot;,
+    &quot;Python.PlayerEntity.executor&quot;: &quot;Run&quot;,
+    &quot;Python.QuestionFactory.executor&quot;: &quot;Run&quot;,
+    &quot;Python.World.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ProjetosPython/SmartMario/asset&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ProjetosPython\SmartMario\asset" />
@@ -221,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756411441970</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Final adjustments">
+      <option name="closed" value="true" />
+      <created>1756423142005</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1756423142021</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -250,6 +248,7 @@
     <MESSAGE value="Created method die" />
     <MESSAGE value="Created method end game" />
     <MESSAGE value="Created class Score.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created class Score.py" />
+    <MESSAGE value="Final adjustments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final adjustments" />
   </component>
 </project>

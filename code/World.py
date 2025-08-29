@@ -126,6 +126,7 @@ class World:
 
             self.world_text(80, f'Question: {self.question_text}', COLOR_WHITE, (190, 360))
             self.world_text(60, f"Score: {self.player.score}", COLOR_BLACK, (WIN_WIDTH // 2 - 120, 250))
+            self.world_text(26, f"Alex Dognini - RU: 4785399", COLOR_WHITE, (10, 900))
 
             if self.show_intro:
                 elapsed = pg.time.get_ticks() - self.intro_start_time
